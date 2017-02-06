@@ -4,7 +4,8 @@
 
 
 以下是目前AnkoExt提供的一些实用方法，以及和Java语言的简单对比：
-1）在Activity中获取常用的服务管理类
+
+在Activity中获取常用的服务管理类
 ### Java
 <pre>
 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)
