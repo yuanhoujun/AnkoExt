@@ -2,6 +2,23 @@
 这个库作为官方的[Anko](https://github.com/Kotlin/anko)的一个扩展，提供官方**Anko**没有提供的一些实用方法，建
 议和官方Anko一起导入到你的项目中。
 
+# 使用方法：
+1) 增加以下脚本到你的工程根目录的build.gradle文件中
+<pre>
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+</pre>
+
+2）在你的app工程中，增加如下依赖:
+<pre>
+dependencies {
+	        compile 'com.github.yuanhoujun:AnkoExt:0.1.0'
+}
+</pre>
 
 以下是目前AnkoExt提供的一些实用方法，以及和Java语言的简单对比：
 
