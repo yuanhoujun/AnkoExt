@@ -72,3 +72,18 @@ val dp = 12.toDp(this)
 val px = 12.toPx(this)
 val dateString = 12L.toDateString("yy-MM-dd HH:mm")
 </pre>
+
+### 针对字符串格式的判断，**AnkoExt**提供了如下接口：
+<pre>
+val str = ...
+// 判断该字符串是否是一个有效的手机号
+str.isPhoneNumber()
+// 判断该字符串是否是一个有效的IP地址
+str.isIP()
+// 判断该字符串是否是一个有效的身份证号
+str.isIdNumber()
+// 判断该字符串是否是一个有效的邮箱地址
+str.isEmail()
+// 判断该字符串是否全是中文
+str.isChinese()
+</pre>
