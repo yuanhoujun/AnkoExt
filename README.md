@@ -104,3 +104,20 @@ str.isEmail()
 // 判断该字符串是否全是中文
 str.isChinese()
 </pre>
+
+### Android常用数据获取
+在Contex的子类，例如：Activity，Application等，可以直接使用如下api获取如下数据:
+<pre>
+// 获取整型版本号
+val versionCode = versionCode()
+// 获取版本名称
+val versionName = versionName()
+// 获取Density
+val density = density()
+// 获取清单文件元数据 (这里可能会导致获取失败)
+val meta = metaData("channel")
+// 获取导航栏高度
+val navigationBarHeight = navigationBarHeight()
+// 获取状态栏高度
+val statusBarHeight = statusBarHeight()
+</pre>

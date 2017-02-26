@@ -5,6 +5,7 @@ import android.app.Fragment
 import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.net.wifi.WifiManager
 import android.preference.PreferenceManager
 import android.support.annotation.LayoutRes
@@ -53,17 +54,93 @@ fun Context.defaultSharedPreferences(): SharedPreferences {
     return PreferenceManager.getDefaultSharedPreferences(this)
 }
 
-@Suppress("UNCHECKED_CAST")
-fun <V: View> Context.inflate(@LayoutRes layoutId: Int, parent: ViewGroup? = null, attachToRoot: Boolean = false): V {
-    return LayoutInflater.from(this).inflate(layoutId , parent , attachToRoot) as V
+/**
+ * 获取Version code
+ *
+ * @return version code
+ */
+fun Context.versionCode(): Int {
+    return packageManager.getPackageInfo(packageName, 0).versionCode
+}
+
+/**
+ * 获取Version name
+ *
+ * @return version name
+ */
+fun Context.versionName(): String {
+    return packageManager.getPackageInfo(packageName, 0).versionName
+}
+
+/**
+ * 获取像素密集度参数density
+ *
+ * @return density
+ */
+fun Context.density(): Float {
+    return resources.displayMetrics.density
+}
+
+/**
+ * 获取metaData
+ *
+ * @param key Meta data对应Key值
+ */
+fun Context.metaData(key: String): String? {
+    val applicationInfo = packageManager.getApplicationInfo(packageName,
+            PackageManager.GET_META_DATA)
+    return applicationInfo.metaData[key] as? String
+}
+
+/**
+ * 获取导航栏高度
+ *
+ * @return 导航栏高度 (px)
+ */
+fun Context.navigationBarHeight(): Int {
+    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+
+    var navigationBarHeight = 0
+    if (resourceId > 0) {
+        navigationBarHeight = resources.getDimensionPixelSize(resourceId)
+    }
+
+    return navigationBarHeight
+}
+
+/**
+ * 获取状态栏高度
+ *
+ * @return 状态栏高度（px）
+ */
+fun Context.statusBarHeight(): Int {
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+
+    var statusBarHeight = 0
+    if (resourceId > 0) {
+        statusBarHeight = resources.getDimensionPixelSize(resourceId)
+    }
+
+    return statusBarHeight
 }
 
 @Suppress("UNCHECKED_CAST")
-fun <V: View> Fragment.inflate(@LayoutRes layoutId: Int, parent: ViewGroup? = null, attachToRoot: Boolean = false): V {
-    return LayoutInflater.from(activity).inflate(layoutId , parent , attachToRoot) as V
+fun <V : View> Context.inflate(@LayoutRes layoutId: Int,
+                               parent: ViewGroup? = null,
+                               attachToRoot: Boolean = false): V {
+    return LayoutInflater.from(this).inflate(layoutId, parent, attachToRoot) as V
 }
 
 @Suppress("UNCHECKED_CAST")
-fun <V: View> android.support.v4.app.Fragment.inflate(@LayoutRes layoutId: Int, parent: ViewGroup? = null, attachToRoot: Boolean = false): V {
-    return LayoutInflater.from(activity).inflate(layoutId , parent , attachToRoot) as V
+fun <V : View> Fragment.inflate(@LayoutRes layoutId: Int,
+                                parent: ViewGroup? = null,
+                                attachToRoot: Boolean = false): V {
+    return LayoutInflater.from(activity).inflate(layoutId, parent, attachToRoot) as V
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <V : View> android.support.v4.app.Fragment.inflate(@LayoutRes layoutId: Int,
+                                                       parent: ViewGroup? = null,
+                                                       attachToRoot: Boolean = false): V {
+    return LayoutInflater.from(activity).inflate(layoutId, parent, attachToRoot) as V
 }
