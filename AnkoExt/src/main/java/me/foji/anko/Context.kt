@@ -1,5 +1,6 @@
 package me.foji.anko
 
+import android.Manifest
 import android.app.AlarmManager
 import android.app.Fragment
 import android.app.NotificationManager
@@ -9,6 +10,7 @@ import android.content.pm.PackageManager
 import android.net.wifi.WifiManager
 import android.preference.PreferenceManager
 import android.support.annotation.LayoutRes
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -143,4 +145,14 @@ fun <V : View> android.support.v4.app.Fragment.inflate(@LayoutRes layoutId: Int,
                                                        parent: ViewGroup? = null,
                                                        attachToRoot: Boolean = false): V {
     return LayoutInflater.from(activity).inflate(layoutId, parent, attachToRoot) as V
+}
+
+/**
+ * 返回指定权限是否已经被授予
+ *
+ * @param permission 权限字符串
+ * @return true 已经被授权 false 没有被授权
+ */
+fun Context.isGranted(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(this , permission) == PackageManager.PERMISSION_GRANTED
 }
