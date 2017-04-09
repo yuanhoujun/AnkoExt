@@ -5,16 +5,20 @@ import android.app.AlarmManager
 import android.app.Fragment
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.net.wifi.WifiManager
 import android.preference.PreferenceManager
 import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.FileProvider
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import java.io.File
 
 /**
  * 该文件主要增加一些Context便捷方法，简化Context部分操作
@@ -155,4 +159,36 @@ fun <V : View> android.support.v4.app.Fragment.inflate(@LayoutRes layoutId: Int,
  */
 fun Context.isGranted(permission: String): Boolean {
     return ContextCompat.checkSelfPermission(this , permission) == PackageManager.PERMISSION_GRANTED
+}
+
+/**
+ * 安装指定外部路径下的应用，兼容Android N，使用FileProvider访问
+ *
+ * @param path      apk文件路径
+ * @param authority FileProvider authority
+ */
+fun Context.installPkg(path: String ,
+                       authority: String) {
+    val pkgFile = File(path)
+
+    if(pkgFile.isFile && pkgFile.extension == "apk") {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.setDataAndType(FileProvider.getUriForFile(this , authority , pkgFile) ,
+                "application/vnd.android.package-archive")
+        startActivity(intent)
+    }
+}
+
+/**
+ * 卸载应用
+ *
+ * @param pkg 应用包名
+ */
+@Throws(Exception::class)
+fun Context.unInstallPkg(pkg: String) {
+    val uri = Uri.parse("package:$pkg")
+    val intent = Intent(Intent.ACTION_DELETE , uri)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    startActivity(intent)
 }
