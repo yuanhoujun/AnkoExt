@@ -45,6 +45,25 @@ fun File.deleteFilesInFolder(withDir: Boolean = false ,
     }
 }
 
+/**
+ * 创建文件及其目录
+ */
+@Throws(IOException::class)
+fun File.createFileWithDir() {
+    if(isDirectory) {
+        mkdirs()
+    } else {
+        val parentFile = parentFile
+        if(!parentFile.exists()) {
+            if (parentFile.mkdirs()) {
+                createNewFile()
+            }
+        } else {
+            createNewFile()
+        }
+    }
+}
+
 private fun totalSizeInFolder(file: File ,
                               onCalculating: ((Long)->Unit)? = null): Long {
     val files = file.listFiles()

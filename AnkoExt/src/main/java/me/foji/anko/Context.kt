@@ -115,6 +115,24 @@ fun Context.navigationBarHeight(): Int {
 }
 
 /**
+ * 获取屏幕宽度
+ *
+ * @return 屏幕宽度
+ */
+fun Context.screenWidth(): Int {
+    return resources.displayMetrics.widthPixels
+}
+
+/**
+ * 获取屏幕高度
+ *
+ * @return 屏幕高度
+ */
+fun Context.screenHeight(): Int {
+    return resources.displayMetrics.widthPixels
+}
+
+/**
  * 获取状态栏高度
  *
  * @return 状态栏高度（px）
