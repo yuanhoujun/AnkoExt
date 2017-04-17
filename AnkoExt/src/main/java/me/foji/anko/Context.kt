@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.net.wifi.WifiManager
 import android.preference.PreferenceManager
@@ -51,6 +52,13 @@ fun Context.alarmManager(): AlarmManager {
  */
 fun Context.wifiManager(): WifiManager {
     return getSystemService(Context.WIFI_SERVICE) as WifiManager
+}
+
+/**
+ * 获取ConnectivityManager
+ */
+fun Context.connectivityManager(): ConnectivityManager {
+    return getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 }
 
 /**
@@ -129,7 +137,7 @@ fun Context.screenWidth(): Int {
  * @return 屏幕高度
  */
 fun Context.screenHeight(): Int {
-    return resources.displayMetrics.widthPixels
+    return resources.displayMetrics.heightPixels
 }
 
 /**
