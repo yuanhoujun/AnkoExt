@@ -25,8 +25,12 @@ fun String.toDate(pattern: String): Date? {
  * 判断当前字符串是否是一个有效的手机号
  * @return true 是 false 否
  */
-fun String.isPhoneNumber(): Boolean {
-    return Pattern.matches("^1\\d{10}$" , this)
+fun String.isPhoneNumber(strictMode: Boolean = false): Boolean {
+    if(strictMode) {
+        return Pattern.matches("^1(3|4|5|7|8)[0-9]\\d{8}\$", this)
+    } else {
+        return Pattern.matches("^1\\d{10}$", this)
+    }
 }
 
 /**
