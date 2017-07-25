@@ -64,3 +64,26 @@ fun String.isEmail(): Boolean {
 fun String.isChinese(): Boolean {
     return Pattern.matches("^[\u4e00-\u9fa5]+$" , this)
 }
+
+/**
+ * 字符串安全转换到整型，转换失败返回0
+ */
+fun String.safeConvertToInt(): Int {
+    try {
+        return toInt()
+    } catch (e: Exception) {
+        return 0
+    }
+}
+
+/**
+ * 字符串安全转换到长整型，转换失败返回0
+ */
+fun String.safeConvertToLong(): Long {
+    try {
+        return toLong()
+    } catch (e: Exception) {
+        return 0L
+    }
+}
+
