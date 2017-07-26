@@ -103,6 +103,20 @@ str.isIdNumber()
 str.isEmail()
 // 判断该字符串是否全是中文
 str.isChinese()
+// 字符串安全转换到整型
+str.safeConvertToInt()
+// 字符串安全转换到整型
+str.safeConvertToInt()
+// 字符串安全转换到长整型
+str.safeConvertToLong()
+// 字符串安全转换到浮点类型
+str.safeConvertToFloat()
+// 字符串安全转换到双精度类型
+str.safeConvertToDouble()
+// 字符串安全转换到短整型类型
+str.safeConvertToShort()
+
+
 </pre>
 
 ### Android常用数据获取
